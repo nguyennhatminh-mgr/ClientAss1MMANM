@@ -47,7 +47,7 @@ class FormGetFile extends Component {
 
     isChangeFileKey = (event) => {
         const value = event.target.files[0];
-        if (value.type !== 'text/plain'){
+        if (value && value.type !== 'text/plain'){
             alert("Please choose key file as text file");
             return;
         }
@@ -59,6 +59,7 @@ class FormGetFile extends Component {
         let reader = new FileReader();
         reader.onload = (event) => {   
             var formData = this.state.formData;
+            formData.delete("content_key");
             formData.append("content_key",event.target.result)
             this.setState({
                 formData: formData,
@@ -66,7 +67,9 @@ class FormGetFile extends Component {
                 content_key: true
             });
         }
-        reader.readAsText(value);
+        if(value){
+            reader.readAsText(value);
+        }
     }
 
     isChangeType = (event) => {
