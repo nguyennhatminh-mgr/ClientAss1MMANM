@@ -20,7 +20,15 @@ class FormGetFile extends Component {
     isChange = (event) => {
         const value = event.target.files;
         const value_name = value.length <= 1 ?value[0].name : value.length + " files are chosen";
-        const formData = new FormData();
+        var formData;
+
+        if(this.state.formData){
+            formData = this.state.formData;
+        }
+        else{
+            formData = new FormData();
+        }
+
         for(var i = 0; i < value.length;i++){
             formData.append("file_to_encrypt",value[i]);
         }
