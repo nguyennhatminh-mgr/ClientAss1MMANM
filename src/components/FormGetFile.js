@@ -8,7 +8,7 @@ class FormGetFile extends Component {
             formData :null,
             link_to_show: null,
             content_key: false,
-            text_show_file_crypt: "Choose file to encrypt/decrypt",
+            text_show_file_crypt: ["Choose file to encrypt/decrypt"],
             text_show_file_key: "Choose key file",
             route_post : null,
             type_algorithm: "kriptaes",
@@ -19,10 +19,16 @@ class FormGetFile extends Component {
 
     isChange = (event) => {
         const value = event.target.files;
-        const value_name = value.length <= 1 ?value[0].name : value.length + " files are chosen";
+        // var value_name = value.length <= 1 ? value[0].name : value.length + " files are chosen";
+        var value_name=[];
+        
+        for(var j = 0; j < value.length; j++){
+            value_name.push(value[j].name);
+        }
+        
         var formData;
 
-        if(this.state.formData){
+        if(this.state.formData && this.state.content_key){
             formData = this.state.formData;
         }
         else{
@@ -136,7 +142,15 @@ class FormGetFile extends Component {
                 <div className="col-xl-8 col-lg-8 col-md-11 col-12">
                     <form encType="multipart/form-data">
                         <div className="form-group wrapfileEncrypt">
-                            <span className="textfileEncrypt">{this.state.text_show_file_crypt}</span>
+                            <div className="textfileEncrypt">
+                                {
+                                    this.state.text_show_file_crypt.map((value,key) => {
+                                        return (
+                                            <p className="m-0" key={key}>{value}</p>
+                                        )
+                                    })
+                                }
+                            </div>
                             <label className="labelfileEncrypt" htmlFor="exampleInputEmail1"><i className="fas fa-upload"></i></label>
                             <input multiple onChange={(event) => {this.isChange(event)}} type="file" name="file_to_encrypt" className="form-control d-none" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                         </div>
