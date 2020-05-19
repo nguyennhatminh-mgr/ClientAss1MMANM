@@ -11,14 +11,15 @@ class FormGetFile extends Component {
             text_show_file_crypt: ["Choose file to encrypt/decrypt"],
             text_show_file_key: "Choose key file",
             route_post : null,
-            type_algorithm: "kriptaes",
+            type_algorithm: "aes_algorithm",
             type_mode: "encrypt",
-            status_decrypt: true
+            status_decrypt: true,
+            text_title_alarm: ""
         }
     }
 
     isChange = (event) => {
-        const value = event.target.files;
+        var value = event.target.files;
         // var value_name = value.length <= 1 ? value[0].name : value.length + " files are chosen";
         var value_name=[];
         
@@ -26,10 +27,11 @@ class FormGetFile extends Component {
             value_name.push(value[j].name);
         }
         
-        var formData;
+        let formData;
 
         if(this.state.formData && this.state.content_key){
             formData = this.state.formData;
+            formData.delete("file_to_encrypt");
         }
         else{
             formData = new FormData();
@@ -92,7 +94,7 @@ class FormGetFile extends Component {
         if(this.state.link_to_show && this.state.status_decrypt){
             return (
                 <div className="showPathToView">
-                    <p>Please enter into folder follow link behind to view result:</p>
+                    <p>{this.state.text_title_alarm}</p>
                     <p>{this.state.link_to_show}</p>
                 </div>
             );
@@ -100,7 +102,7 @@ class FormGetFile extends Component {
         else if(this.state.link_to_show && !this.state.status_decrypt){
             return (
                 <div className="showPathToView">
-                    <h3>Error !!!</h3>
+                    <p>{this.state.text_title_alarm}</p>
                     <p>{this.state.link_to_show}</p>
                 </div>
             );
@@ -121,7 +123,8 @@ class FormGetFile extends Component {
             if(newPath.length === 1){
                 this.setState({
                     link_to_show: newPath[0],
-                    status_decrypt:false
+                    status_decrypt:false,
+                    text_title_alarm: "Error!!!"
                 });
             }
             else{
@@ -131,7 +134,8 @@ class FormGetFile extends Component {
                 }
                 result_path += newPath[newPath.length - 2];
                 this.setState({
-                    link_to_show: result_path
+                    link_to_show: result_path,
+                    text_title_alarm: "Please enter into folder follow link under to view result!"
                 });
             }
         }).catch((error) => {
@@ -165,8 +169,8 @@ class FormGetFile extends Component {
                         <div className="form-group ">
                             <label htmlFor="exampleFormControlSelect1">Choose algorithm</label>
                             <select onChange={this.isChangeType} name="type_algorithm" className="form-control wrapfileEncrypt" id="exampleFormControlSelect1">
-                                <option value="kriptaes">KriptaAES</option>
-                                <option value="kriptarsa">KriptaRSA</option>
+                                <option value="aes_algorithm">AES Algorithm</option>
+                                <option value="rsa_algorithm">RSA Algorithm</option>
                             </select>
                         </div>
                         <div className="form-group">
