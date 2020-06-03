@@ -56,8 +56,23 @@
 .showPathToView{
   margin-top: 10px;
   padding: 4px 8px;
-  background-color: #8d0e0e;
   color: white;
   border-radius: 4px;
   box-shadow: 1px 1px 5px #8d0e0e;
+}
+
+.bg-success{
+  background-color: #1aaa1a;
+}
+
+.bg-failed{
+  background-color: #8d0e0e;
+}
+
+.color-file-name{
+  color: red !important;
+}
+
+.seperate_line{
+  border-bottom: 1px dashed #8d0e0e;
 }

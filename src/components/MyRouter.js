@@ -9,7 +9,7 @@ class MyRouter extends Component {
             <div>
                 <Route exact path="/crypt" component={FormGetFile}></Route>
                 <Route exact path="/" component={FormGetFile}></Route>
-                <Route exact path="/checksum" component={CheckSum}></Route>
+                <Route exact path="/checkintegrity" component={CheckSum}></Route>
             </div>
         );
     }

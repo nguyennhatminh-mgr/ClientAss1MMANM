@@ -7,7 +7,7 @@ class Header extends Component {
             <div className="mb-5">
                 <nav className="navbar navbar-light bg-light d-flex justify-content-center">
                     <a className="navbar-brand text-white" href="/crypt">
-                        Encrypt - Decrypt
+                        ASE - RSA
                     </a>
                 </nav>
                 <ul className="nav nav-tabs container">
@@ -15,7 +15,7 @@ class Header extends Component {
                         <NavLink activeClassName="selected" className="nav-link" to="/crypt">Encrypt - Decrypt</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink activeClassName="selected" className="nav-link" to="/checksum">Check sum</NavLink>
+                        <NavLink activeClassName="selected" className="nav-link" to="/checkintegrity">Check Integrity</NavLink>
                     </li>
                 </ul>
             </div>
